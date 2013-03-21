@@ -53,9 +53,9 @@ class User < ActiveRecord::Base
   private
 
   def add_user_to_mailchimp
-    unless self.email.include?('@example.com') or !self.opt_in?
-      mailchimp = Hominid::API.new(ENV["MAILCHIMP_API_KEY"])
-      list_id = mailchimp.find_list_id_by_name "visitors"
+    unless self.email.include?('roderick@theeightysixes.com') or !self.opt_in?
+      mailchimp = Hominid::API.new(ENV["b963aa6407d302cf73545d661e5b7f9f-us5"])
+      list_id = mailchimp.find_list_id_by_name "Test Prelaunch"
       info = { }
       result = mailchimp.list_subscribe(list_id, self.email, info, 'html', false, true, false, true)
       Rails.logger.info("MAILCHIMP SUBSCRIBE: result #{result.inspect} for #{self.email}")
@@ -63,9 +63,9 @@ class User < ActiveRecord::Base
   end
   
   def remove_user_from_mailchimp
-    unless self.email.include?('@example.com')
-      mailchimp = Hominid::API.new(ENV["MAILCHIMP_API_KEY"])
-      list_id = mailchimp.find_list_id_by_name "visitors"
+    unless self.email.include?('@roderick@theeightysixes.com')
+      mailchimp = Hominid::API.new(ENV["b963aa6407d302cf73545d661e5b7f9f-us5"])
+      list_id = mailchimp.find_list_id_by_name "Test Prelaunch"
       result = mailchimp.list_unsubscribe(list_id, self.email, true, false, true)  
       Rails.logger.info("MAILCHIMP UNSUBSCRIBE: result #{result.inspect} for #{self.email}")
     end
